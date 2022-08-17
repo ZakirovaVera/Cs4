@@ -8,7 +8,12 @@ Console.Clear();
 int firstNum = GetNumberFromUser("Введите целое число 1: ", "Ошибка ввода!");
 int secondNum = GetNumberFromUser("Введите целое число 2: ", "Ошибка ввода!");
 
-int result = NumberToPowerNumber(firstNum, secondNum);
+if(firstNum == 0 && secondNum<0)
+{
+    Console.WriteLine("Ошибка деления на 0");
+    return;
+}
+double result = NumberToPowerNumber(firstNum, secondNum);
 
 int GetNumberFromUser(string message, string errorMessage)
 {
@@ -22,13 +27,17 @@ int GetNumberFromUser(string message, string errorMessage)
     }
 }
 
-int NumberToPowerNumber(int number, int power)
+double NumberToPowerNumber(int number, int power)
 {
-    int numberPower = 1;
-    for (int i = 1; i <= power; i++)
+        double numberPower = 1;
+    for (int i = 1; i <= Math.Abs(power); i++)
     {
         numberPower = numberPower * number;
     }
+
+    if (power < 0)
+        numberPower = 1 / numberPower;
+
     return numberPower;
 }
-Console.WriteLine($"{firstNum} в степени {secondNum} = {result}");
+Console.WriteLine($"{firstNum}, {secondNum} -> {result}");
