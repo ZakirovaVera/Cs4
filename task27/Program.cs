@@ -5,34 +5,32 @@
 // 9012 -> 12
 
 Console.Clear();
+int num = NumberEnteredByUser("Введите целое число: ", "Ошибка ввода!");
 
-int num = GetNumberFromUser("Введите целое число A: ", "Ошибка ввода!");
+int sumDigits = SumDigitsNumber(num);
 
-Console.WriteLine("Cумма цифр в числе");
+Console.WriteLine("Сумма цифр в числе:");
+Console.WriteLine($"{num} -> {sumDigits}");
 
-int sumDigits = GetSumDigits(num);
-Console.WriteLine($"\t{num} -> {sumDigits}");
-
-int GetNumberFromUser(string message, string errorMessage)
+int NumberEnteredByUser(string message, string messageError)
 {
     while (true)
     {
         Console.Write(message);
-        bool isCorrect = int.TryParse(Console.ReadLine(), out int userNumber);
-        if (isCorrect)
+        bool correctParse = int.TryParse(Console.ReadLine(), out int userNumber);
+        if (correctParse)
             return userNumber;
-        Console.WriteLine(errorMessage);
+        Console.WriteLine(messageError);
     }
 }
 
-// Возвращает сумму цифр в числе number
-int GetSumDigits(int number)
+int SumDigitsNumber(int number)
 {
-    int sum = 0;
+    int summa = 0;
     while (Math.Abs(number) > 0)
     {
-        sum += number % 10;
-        number /= 10;
+        summa += number % 10;
+        number /= 10; 
     }
-    return sum;
+    return summa;
 }
